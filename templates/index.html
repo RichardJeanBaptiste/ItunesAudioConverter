@@ -59,9 +59,9 @@
         </div> 
     </div>
     
-    <!---<script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>-->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
     <script type="text/javascript" charset="utf-8">
-        //let socket = io();
+        let socket = io("https://itunes-audio.herokuapp.com/");
         let mainForm = document.getElementById("mainForm");
         let loaderForm = document.getElementById("loaderForm");
         let loaderText = document.getElementById("loader-text");
@@ -76,7 +76,7 @@
         alert("test");
 
         clearForms();
-        /*
+        
         socket.on('changeAudio', function(msg) {    
             mainForm.style.visibility = "hidden";
             loaderForm.style.visibility = "visible";
@@ -99,7 +99,7 @@
             instruct.style.visibility = "visible";
             clearForms();
         })
-        */
+    
 
     </script>
     
