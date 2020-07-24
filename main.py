@@ -104,4 +104,5 @@ def getAudio():
     return send_file(zipFile)
 
 if __name__ == "__main__":
-    socketio.run(app)
+    #socketio.run(app)
+    app.run()
