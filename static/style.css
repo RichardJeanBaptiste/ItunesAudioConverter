@@ -1,0 +1,36 @@
+#mainForm {
+    text-align: center;
+    margin-top: 3%;
+    visibility: visible;
+}
+
+#loaderForm{
+    margin-top: -6%;
+    margin-left: 44%;
+    visibility: hidden;
+}
+
+#loaderForm p {
+    margin-right: 5%;
+    font-size: 20px;
+    font-family: 'Martel Sans', sans-serif;
+}
+
+#url{
+    width: 40vw;
+}
+
+h1{
+    font-family: 'Montserrat', sans-serif;
+}
+
+#instruct{
+    text-align: center;
+    margin-top: 1%;
+    font-family: 'Martel Sans', sans-serif;
+    visibility: 'visible';
+}
+
+#instruct p{
+    margin-left: 8%;
+}

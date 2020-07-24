@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Itunes Playlist Converter</title>
+    <!---- Icon ---->
+    <link rel="icon" href="../static/download_arrow2.jpg" type="image/x-icon">
+    <!-----Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Martel+Sans:wght@300&display=swap" rel="stylesheet">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <h1 style="text-align: center; margin-top: 8%;">Itunes Playlist Converter</h1>
+
+    <div id="mainForm">
+        <br/>
+        <form action='/audio' method="POST">
+            <input type="text" name="val" placeholder="url" id="url" required>
+            <br/>
+            <br/>
+            <input id="albumArtist" type="text" name="albumArtist" placeholder="playlist author" required>
+            <input id="albumName" type="text" name="albumName" placeholder="playlist name" required>
+            <br/>
+            <br/>
+                <input class="btn btn-primary" type="submit" value="Download" id="submitBtn">
+        </form>
+    </div>
+
+    <br/>
+    <div id="instruct" class="row">
+        <p class=".col-sm-4">
+            1) Go to youtube.com and get a playlist url
+        </p>
+
+        <p class=".col-sm-4">
+            2) Enter a name and author for the playlist.
+                <br/>
+               (These can be anything you want)
+        </p>
+
+        <p class=".col-sm-4">
+            3) Download and add to Itunes.
+        </p>
+    </div>
+
+    <div id="loaderForm" class="row">
+        <p class=".col-sm-4" id="loader-text"></p>
+        <div class="spinner-border .col-sm-4 text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div> 
+    </div>
+    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+    <script type="text/javascript" charset="utf-8">
+        let socket = io();
+        let mainForm = document.getElementById("mainForm");
+        let loaderForm = document.getElementById("loaderForm");
+        let loaderText = document.getElementById("loader-text");
+        let instruct = document.getElementById("instruct");
+
+        function clearForms(){
+            document.getElementById('url').value = "";
+            document.getElementById('albumArtist').value = "";
+            document.getElementById('albumName').value = "";
+        }
+
+        clearForms();
+
+        socket.on('changeAudio', function(msg) {    
+            mainForm.style.visibility = "hidden";
+            loaderForm.style.visibility = "visible";
+            loaderText.innerText = "Getting playlist";
+            instruct.style.visibility = "hidden";
+        });
+
+        socket.on('toMp3',function(){
+            loaderText.innerText = "Converting playlist";
+        });
+
+        socket.on('toAlbum', function(){
+            loaderText.innerText = "Sending To You Now";
+        });
+
+        socket.on('startOver', function(){
+            loaderForm.style.visibility = "hidden";
+            mainForm.style.visibility = "visible";
+            loaderText.innerText = "";
+            instruct.style.visibility = "visible";
+            clearForms();
+        })
+
+    </script>
+    
+</body>
+</html>
