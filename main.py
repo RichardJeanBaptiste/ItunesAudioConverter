@@ -53,7 +53,7 @@ def changeAudio(x,dir):
             pass
 
 def toMp3(artist,album,dir):
-    toMp3_message()
+    #toMp3_message()
     urls = os.listdir(dir)
     for x in urls:
         try:
@@ -73,7 +73,7 @@ def toMp3(artist,album,dir):
 
 
 def toAlbum(album,dir):
-    toAlbum_message()
+    #toAlbum_message()
     albumDir = "zip/" + album
     shutil.make_archive(albumDir, 'zip', dir)
     
@@ -100,7 +100,7 @@ def getAudio():
     toMp3(artist,album,dir)
     toAlbum(album,dir)
     zipFile = "zip/" + album + ".zip"
-    startOver()
+    #startOver()
     return send_file(zipFile)
 
 if __name__ == "__main__":
