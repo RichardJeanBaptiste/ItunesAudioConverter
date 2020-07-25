@@ -25,7 +25,7 @@ def clearDirs():
     
 
 sched = BackgroundScheduler(daemon=True)
-sched.add_job(clearDirs,'interval',hours=6)
+sched.add_job(clearDirs,'interval',mins=5)
 sched.start()
 
 def changeAudio_message():
@@ -73,9 +73,13 @@ def toMp3(artist,album,dir):
 
 
 def toAlbum(album,dir):
-    #toAlbum_message()
-    albumDir = "zip/" + album
-    shutil.make_archive(albumDir, 'zip', dir)
+    try:
+        #toAlbum_message()
+        albumDir = "zip/" + album
+        shutil.make_archive(albumDir, 'zip', dir)
+    except Exception as e:
+        print(e)
+    
     
     
 @app.route("/")
