@@ -14,15 +14,14 @@ app.config['SECRET_KEY'] = b'\x1a\x95\xe3A\xd9\x03Z-\xe8\xbb\xb4\x7f\x1f\xb63p'
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 socketio = SocketIO(app)
 
-cwd = os.getcwd()
-print("this is ----" + cwd)
+print(os.listdir("app/tmp"))
 
 def clearDirs():
     os.chdir("tmp")
     tmpList = os.listdir("tmp")
     for x in tmpList:
         try:
-            shutil.rmtree("tmp/" + x)
+            shutil.rmtree("app/tmp/" + x)
         except Exception:
             print(x + " was not deleted")
     
