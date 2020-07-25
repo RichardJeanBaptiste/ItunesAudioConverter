@@ -69,7 +69,7 @@ def toMp3(artist,album,dir):
             mp3.save()
             os.remove(songUrl)
         except Exception:
-            pass
+            print(Exception)
 
 
 def toAlbum(album,dir):
