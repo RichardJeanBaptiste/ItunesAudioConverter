@@ -68,8 +68,8 @@ def toMp3(artist,album,dir):
             mp3.album = album
             mp3.save()
             os.remove(songUrl)
-        except Exception:
-            print(Exception)
+        except Exception as e:
+            print(e)
 
 
 def toAlbum(album,dir):
