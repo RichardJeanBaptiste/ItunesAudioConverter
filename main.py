@@ -25,7 +25,7 @@ def clearDirs():
     
 
 sched = BackgroundScheduler(daemon=True)
-sched.add_job(clearDirs,'interval',mins=5)
+sched.add_job(clearDirs,'interval',minutes=5)
 sched.start()
 
 def changeAudio_message():
