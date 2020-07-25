@@ -15,9 +15,10 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 socketio = SocketIO(app)
 
 cwd = os.getcwd()
-print(cwd)
+print("this is ----" + cwd)
 
 def clearDirs():
+    os.chdir("tmp")
     tmpList = os.listdir("tmp")
     for x in tmpList:
         try:
