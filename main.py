@@ -14,7 +14,7 @@ app.config['SECRET_KEY'] = b'\x1a\x95\xe3A\xd9\x03Z-\xe8\xbb\xb4\x7f\x1f\xb63p'
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 socketio = SocketIO(app)
 
-print(os.listdir("tmp"))
+#print(os.listdir("tmp"))
 
 '''
 def clearDirs():
@@ -128,8 +128,8 @@ def getAudio():
     os.mkdir(dir)
     changeAudio(url,dir)
     toMp3(artist,album,dir)
-    toAlbum(album,dir)
-    zipFile = "zip/" + album + ".zip"
+    #toAlbum(album,dir)
+    #zipFile = "zip/" + album + ".zip"
     #startOver()
     return send_file(zipFile)
 
