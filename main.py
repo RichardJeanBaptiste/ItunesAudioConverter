@@ -125,12 +125,18 @@ def getAudio():
     url = request.form['val']
     artist = request.form['albumArtist']
     album = request.form['albumName']
-    return url + " " + artist + " " + album
+    #create tmp dir
+    my_id = uuid.uuid1()
+    dir = "tmp/testDir-" + str(my_id)
+    os.mkdir(dir)
+    test = os.listdir(dir)
+    return test
     '''
     #create tmp dir
     my_id = uuid.uuid1()
     dir = "tmp/testDir-" + str(my_id)
     os.mkdir(dir)
+
     changeAudio(url,dir)
     toMp3(artist,album,dir)
     toAlbum(album,dir)
