@@ -25,25 +25,14 @@ def clearDirs():
             shutil.rmtree("app/tmp/" + x)
         except Exception:
             print(x + " was not deleted")
+    print(os.listdir("tmp"))
     
 
 sched = BackgroundScheduler(daemon=True)
 sched.add_job(clearDirs,'interval',minutes=2)
 sched.start()
 
-'''
-def changeAudio_message():
-    socketio.emit('changeAudio', 'Getting Url')
-
-def toMp3_message():
-    socketio.emit('toMp3', 'To Mp3')
-
-def toAlbum_message():
-    socketio.emit('toAlbum', 'To Album')
-
-def startOver():
-    socketio.emit('startOver', 'start again')
-
+# Download Audio
 
 def changeAudio(x,dir):
     changeAudio_message()
@@ -55,6 +44,15 @@ def changeAudio(x,dir):
             return 'no video formats found...try again'
         except IndexError:
             pass
+
+
+def changeAudio_message():
+    try:
+        socketio.emit('changeAudio', 'Getting Url')
+    except Exception:
+        print(Exception)
+
+# Convert To Mp3
 
 def toMp3(artist,album,dir):
     #toMp3_message()
@@ -75,6 +73,15 @@ def toMp3(artist,album,dir):
         except Exception as e:
             print(e)
 
+def toMp3_message():
+    try:
+        socketio.emit('toMp3', 'To Mp3')
+    except Exception:
+        print(Exception)
+    
+
+
+# Create Album from audio files
 
 def toAlbum(album,dir):
     try:
@@ -83,8 +90,21 @@ def toAlbum(album,dir):
         shutil.make_archive(albumDir, 'zip', dir)
     except Exception as e:
         print(e)
+
+def toAlbum_message():
+    try:
+        socketio.emit('toAlbum', 'To Album')
+    except Exception:
+        print(Exception)
     
-'''   
+
+def startOver():
+    try:
+        socketio.emit('startOver', 'start again')
+    except Exception:
+        print(Exception)
+    
+
     
 @app.route("/")
 def hello():
