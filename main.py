@@ -15,6 +15,7 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 socketio = SocketIO(app)
 
 #print(os.listdir("tmp"))
+print(os.listdir("zip"))
 
 '''
 def clearDirs():
@@ -128,10 +129,11 @@ def getAudio():
     os.mkdir(dir)
     changeAudio(url,dir)
     toMp3(artist,album,dir)
-    #toAlbum(album,dir)
+    toAlbum(album,dir)
     #zipFile = "zip/" + album + ".zip"
     #startOver()
-    return send_file(zipFile)
+    #return send_file(zipFile)
+    return "Complete"
 
 if __name__ == "__main__":
     #socketio.run(app)
