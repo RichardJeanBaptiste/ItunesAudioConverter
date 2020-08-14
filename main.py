@@ -125,6 +125,8 @@ def getAudio():
     url = request.form['val']
     artist = request.form['albumArtist']
     album = request.form['albumName']
+    return url + " " + artist + " " + album
+    '''
     #create tmp dir
     my_id = uuid.uuid1()
     dir = "tmp/testDir-" + str(my_id)
@@ -135,7 +137,8 @@ def getAudio():
     #zipFile = "zip/" + album + ".zip"
     #startOver()
     #return send_file(zipFile)
-    return "Complete"
+    '''
+    
 
 if __name__ == "__main__":
     #socketio.run(app)
