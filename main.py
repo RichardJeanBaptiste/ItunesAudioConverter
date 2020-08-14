@@ -3,6 +3,7 @@ import ffmpeg
 import os
 import uuid 
 import shutil
+from pathlib import Path
 from flask import Flask, render_template, request, send_file
 from flask_socketio import SocketIO,emit, send
 from mp3_tagger import MP3File
@@ -15,7 +16,8 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 socketio = SocketIO(app)
 
 #print(os.listdir("tmp"))
-print(os.listdir("zip"))
+p = Path('./')
+list(p.glob('**'))
 
 '''
 def clearDirs():
