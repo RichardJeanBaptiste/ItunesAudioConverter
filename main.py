@@ -14,8 +14,9 @@ app.config['SECRET_KEY'] = b'\x1a\x95\xe3A\xd9\x03Z-\xe8\xbb\xb4\x7f\x1f\xb63p'
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 socketio = SocketIO(app)
 
-print(os.listdir("app/tmp"))
+print(os.listdir("tmp"))
 
+'''
 def clearDirs():
     os.chdir("tmp")
     tmpList = os.listdir("tmp")
@@ -82,7 +83,7 @@ def toAlbum(album,dir):
     except Exception as e:
         print(e)
     
-    
+'''   
     
 @app.route("/")
 def hello():
