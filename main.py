@@ -86,9 +86,10 @@ def toMp3_message():
 
 def toAlbum(album,dir):
     try:
-        #toAlbum_message()
+        print("To Album")
         albumDir = "zip/" + album
         shutil.make_archive(albumDir, 'zip', dir)
+        toAlbum_message()
     except Exception as e:
         print(e)
 
