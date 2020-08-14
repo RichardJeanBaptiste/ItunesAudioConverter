@@ -16,7 +16,7 @@ socketio = SocketIO(app)
 
 print(os.listdir("tmp"))
 
-'''
+
 def clearDirs():
     os.chdir("tmp")
     tmpList = os.listdir("tmp")
@@ -28,9 +28,10 @@ def clearDirs():
     
 
 sched = BackgroundScheduler(daemon=True)
-sched.add_job(clearDirs,'interval',minutes=5)
+sched.add_job(clearDirs,'interval',minutes=2)
 sched.start()
 
+'''
 def changeAudio_message():
     socketio.emit('changeAudio', 'Getting Url')
 
