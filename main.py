@@ -15,9 +15,6 @@ app.config['SECRET_KEY'] = b'\x1a\x95\xe3A\xd9\x03Z-\xe8\xbb\xb4\x7f\x1f\xb63p'
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 socketio = SocketIO(app)
 
-#print(os.listdir("tmp"))
-
-
 '''
 def clearDirs():
     os.chdir("tmp")
@@ -47,7 +44,7 @@ def changeAudio(x,dir,artist,album):
             return 'no video formats found...try again'
         except IndexError:
             pass
-    toMp3(artist,album,dir)
+    #toMp3(artist,album,dir)
 
 
 def changeAudio_message():
@@ -107,7 +104,7 @@ def toMp3_message():
 
 # Create Album from audio files
 
-'''
+
 def toAlbum(album,dir):
     try:
         albumDir = "zip/" + album
@@ -129,7 +126,7 @@ def startOver():
         socketio.emit('startOver', 'start again')
     except Exception:
         print(Exception)
-'''
+
 
 dir = ""
 album = ""
@@ -143,7 +140,7 @@ def hello():
 
 
 @app.route("/audio", methods=['GET','POST'])
-def getAudio():
+async def getAudio():
     #get form data
     url = request.form['val']
     artist = request.form['albumArtist']
@@ -155,25 +152,16 @@ def getAudio():
     os.mkdir(dir)
 
     changeAudio(url,dir,artist,album)
-    #toMp3(artist,album,dir)
-    #toAlbum(album,dir)
+    await asyncio.sleep(30)
+    toMp3(artist,album,dir)
+    toAlbum(album,dir)
 
     #print(os.listdir(os.getcwd()))
-    #zipFile = album + ".zip"
+    zipFile = album + ".zip"
      
-    return render_template("test.html")
+    await asyncio.sleep(90) 
+    return send_file(zipFile) 
 
-@app.route("/test", methods=['GET','POST'])
-def toAlbum():
-    try:
-        albumDir = album + ".zip"
-        albumDir = album
-        shutil.make_archive(albumDir, 'zip', dir)
-        toAlbum_message()
-    except Exception as e:
-        print(e)
-    
-    
 
 if __name__ == "__main__":
     #socketio.run(app)
