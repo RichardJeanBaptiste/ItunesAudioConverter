@@ -133,11 +133,12 @@ def getAudio():
 
     changeAudio(url,dir)
     toMp3(artist,album,dir)
-    toAlbum(album,dir)
+    #toAlbum(album,dir)
 
-    zipFile = "zip/" + album + ".zip"
+    #zipFile = "zip/" + album + ".zip"
 
-    return send_file(zipFile)
+    #return send_file(zipFile)
+    return 'Completed'
     
     
 
