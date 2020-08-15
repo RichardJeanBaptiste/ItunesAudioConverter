@@ -153,7 +153,7 @@ def getAudio():
     os.mkdir(dir)
 
     changeAudio(url,dir,artist,album)
-    loop.run_until_complete(toMp3(artist,album,dir))
+    toMp3(artist,album,dir)
     toAlbum(album,dir)
 
     #print(os.listdir(os.getcwd()))
