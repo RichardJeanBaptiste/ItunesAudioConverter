@@ -121,7 +121,7 @@ def hello():
 
 
 @app.route("/audio", methods=['GET','POST'])
-async def getAudio():
+def getAudio():
     #get form data
     url = request.form['val']
     artist = request.form['albumArtist']
