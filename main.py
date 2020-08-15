@@ -57,6 +57,7 @@ def changeAudio_message():
 
 # Convert To Mp3
 urls = ""
+blockReturn = true
 
 async def toMp3(artist,album,dir):
     #toMp3_message()
@@ -75,9 +76,7 @@ async def toMp3(artist,album,dir):
             mp3.album = album
             mp3.save()
             os.remove(songUrl)
-        toAlbum(album,dir)
-        zipFile = album + ".zip"
-        return send_file(zipFile)
+        blockReturn = false
     except Exception as e:
         print(e)
 
@@ -143,12 +142,18 @@ def getAudio():
 
     changeAudio(url,dir,artist,album)
     toMp3(artist,album,dir)
-    #toAlbum(album,dir)
+    
 
     #print(os.listdir(os.getcwd()))
+
+    while(blockReturn):
+        print("waiting")
+
+    toAlbum(album,dir)
+
     zipFile = album + ".zip"
      
-    #return send_file(zipFile) 
+    return send_file(zipFile) 
 
 
 if __name__ == "__main__":
