@@ -75,6 +75,9 @@ async def toMp3(artist,album,dir):
             mp3.album = album
             mp3.save()
             os.remove(songUrl)
+        toAlbum(album,dir)
+        zipFile = album + ".zip"
+        return send_file(zipFile)
     except Exception as e:
         print(e)
 
@@ -140,12 +143,12 @@ def getAudio():
 
     changeAudio(url,dir,artist,album)
     toMp3(artist,album,dir)
-    toAlbum(album,dir)
+    #toAlbum(album,dir)
 
     #print(os.listdir(os.getcwd()))
     zipFile = album + ".zip"
      
-    return send_file(zipFile) 
+    #return send_file(zipFile) 
 
 
 if __name__ == "__main__":
