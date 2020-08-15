@@ -151,7 +151,7 @@ def getAudio():
     dir = "Dir-" + str(my_id)
     os.mkdir(dir)
 
-    changeAudio(url,dir)
+    changeAudio(url,dir,artist,album)
     #toMp3(artist,album,dir)
     toAlbum(album,dir)
 
