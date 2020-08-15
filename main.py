@@ -43,6 +43,7 @@ def changeAudio(x,dir):
     for x in range(len(playlist) - 1):
         try:
             playlist['items'][x]['pafy'].getbestaudio(preftype="m4a").download(filepath=dir)
+            print(dir + "/" + playlist['items'][x])
         except OSError:
             return 'no video formats found...try again'
         except IndexError:
@@ -59,7 +60,9 @@ def changeAudio_message():
 
 async def toMp3(artist,album,dir):
     #toMp3_message()
-    urls = os.listdir(dir)
+    #urls = os.listdir(dir)
+    await changeTags(artist,album,dir)
+    '''
     for x in urls:
         try:
             name = dir + "/" + x[:-5] + '.mp3'
@@ -75,6 +78,25 @@ async def toMp3(artist,album,dir):
             os.remove(songUrl)
         except Exception as e:
             print(e)
+        '''
+
+def changeTags(artist,album,dir):
+    for x in urls:
+        try:
+            name = dir + "/" + x[:-5] + '.mp3'
+            print(name)
+            songUrl = dir + "/" + x
+            stream = ffmpeg.input(songUrl)
+            stream = ffmpeg.output(stream, name)
+            ffmpeg.run(stream)
+            mp3 = MP3File(name)
+            mp3.artist = artist
+            mp3.album = album
+            mp3.save()
+            os.remove(songUrl)
+        except Exception as e:
+            print(e)
+
 
 def toMp3_message():
     try:
