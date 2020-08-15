@@ -87,11 +87,11 @@ def toMp3_message():
 
 def toAlbum(album,dir):
     try:
-        print("To Album")
+        print("ZIP FILES " + album + " " + dir)
         #albumDir = "zip/" + album
-        albumDir = album
-        shutil.make_archive(albumDir, 'zip', dir)
-        toAlbum_message()
+        #albumDir = album
+        #shutil.make_archive(albumDir, 'zip', dir)
+        #toAlbum_message()
     except Exception as e:
         print(e)
 
@@ -138,14 +138,7 @@ def getAudio():
     zipFile = "zip/" + album + ".zip"
 
     return send_file(zipFile)
-    '''
-    changeAudio(url,dir)
-    toMp3(artist,album,dir)
-    toAlbum(album,dir)
-    #zipFile = "zip/" + album + ".zip"
-    #startOver()
-    #return send_file(zipFile)
-    '''
+    
     
 
 if __name__ == "__main__":
