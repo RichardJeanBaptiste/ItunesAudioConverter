@@ -57,10 +57,11 @@ def changeAudio_message():
         print(Exception)
 
 # Convert To Mp3
+urls = ""
 
 def toMp3(artist,album,dir):
     #toMp3_message()
-    #urls = os.listdir(dir)
+    urls = os.listdir(dir)
     for x in urls:
         try:
             name = dir + "/" + x[:-5] + '.mp3'
