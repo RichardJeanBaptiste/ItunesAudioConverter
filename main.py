@@ -3,7 +3,6 @@ import ffmpeg
 import os
 import uuid 
 import shutil
-from pathlib import Path
 from flask import Flask, render_template, request, send_file
 from flask_socketio import SocketIO,emit, send
 from mp3_tagger import MP3File
@@ -16,8 +15,7 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 socketio = SocketIO(app)
 
 #print(os.listdir("tmp"))
-p = Path('./')
-list(p.glob('**'))
+
 
 '''
 def clearDirs():
@@ -90,7 +88,8 @@ def toMp3_message():
 def toAlbum(album,dir):
     try:
         print("To Album")
-        albumDir = "zip/" + album
+        #albumDir = "zip/" + album
+        albumDir = album
         shutil.make_archive(albumDir, 'zip', dir)
         toAlbum_message()
     except Exception as e:
@@ -110,6 +109,7 @@ def startOver():
         print(Exception)
     
 
+dir = ""
     
 @app.route("/")
 def hello():
@@ -125,18 +125,20 @@ def getAudio():
     url = request.form['val']
     artist = request.form['albumArtist']
     album = request.form['albumName']
+    
     #create tmp dir
     my_id = uuid.uuid1()
-    dir = "tmp/testDir-" + str(my_id)
-    os.mkdir(dir)
-    test = os.listdir(dir)
-    return test
-    '''
-    #create tmp dir
-    my_id = uuid.uuid1()
-    dir = "tmp/testDir-" + str(my_id)
+    dir = "Dir-" + str(my_id)
     os.mkdir(dir)
 
+    changeAudio(url,dir)
+    toMp3(artist,album,dir)
+    toAlbum(album,dir)
+
+    zipFile = "zip/" + album + ".zip"
+
+    return send_file(zipFile)
+    '''
     changeAudio(url,dir)
     toMp3(artist,album,dir)
     toAlbum(album,dir)
