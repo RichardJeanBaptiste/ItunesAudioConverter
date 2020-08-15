@@ -4,6 +4,7 @@ import os
 import uuid 
 import shutil
 import asyncio
+import threading
 from flask import Flask, render_template, request, send_file
 from flask_socketio import SocketIO,emit, send
 from mp3_tagger import MP3File
@@ -31,7 +32,7 @@ sched = BackgroundScheduler(daemon=True)
 sched.add_job(clearDirs,'interval',minutes=2)
 sched.start()
 '''
-loop = asyncio.get_event_loop()
+
 
 # Download Audio
 
@@ -60,24 +61,6 @@ urls = ""
 def toMp3(artist,album,dir):
     #toMp3_message()
     urls = os.listdir(dir)
-    for x in urls:
-        try:
-            name = dir + "/" + x[:-5] + '.mp3'
-            print(name)
-            songUrl = dir + "/" + x
-            stream = ffmpeg.input(songUrl)
-            stream = ffmpeg.output(stream, name)
-            ffmpeg.run(stream)
-            mp3 = MP3File(name)
-            mp3.artist = artist
-            mp3.album = album
-            mp3.save()
-            os.remove(songUrl)
-        except Exception as e:
-            print(e)
-        
-
-def changeTags(artist,album,dir):
     for x in urls:
         try:
             name = dir + "/" + x[:-5] + '.mp3'
@@ -131,6 +114,8 @@ def startOver():
 
 dir = ""
 album = ""
+
+
     
 @app.route("/")
 def hello():
@@ -152,10 +137,17 @@ def getAudio():
     dir = "Dir-" + str(my_id)
     os.mkdir(dir)
 
-    changeAudio(url,dir,artist,album)
-    toMp3(artist,album,dir)
-    toAlbum(album,dir)
+    #changeAudio(url,dir,artist,album)
+    #toMp3(artist,album,dir)
+    #toAlbum(album,dir)
 
+    t1 = threading.Thread(target=changeAudio, args=(url,dir,artist,album))
+    t2 = threading.Thread(target=toMp3, args=(artist,album,dir))
+    t3 = threading.Thread(target=toAlbum, args=(album,dir))
+
+    t1.join()
+    t2.join()
+    t3.join()
     #print(os.listdir(os.getcwd()))
     zipFile = album + ".zip"
      
@@ -163,5 +155,4 @@ def getAudio():
 
 
 if __name__ == "__main__":
-    #socketio.run(app)
     app.run()
