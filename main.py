@@ -86,7 +86,7 @@ def toMp3_message():
 
 # Create Album from audio files
 
-def toAlbum(album,dir):
+async def toAlbum(album,dir):
     try:
         #print("ZIP FILES " + album + " " + dir)
         albumDir = "zip/" + album
