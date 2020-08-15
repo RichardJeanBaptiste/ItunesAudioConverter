@@ -136,7 +136,7 @@ def getAudio():
     toMp3(artist,album,dir)
     toAlbum(album,dir)
 
-    print(os.listdir('app'))
+    print(os.listdir(os.getcwd()))
     #os.chdir('app')
     #zipFile = "/app/" + dir + ".zip"
      
