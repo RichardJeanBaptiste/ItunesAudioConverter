@@ -58,11 +58,12 @@ def changeAudio_message():
 # Convert To Mp3
 urls = ""
 
-def toMp3(artist,album,dir):
+async def toMp3(artist,album,dir):
     #toMp3_message()
     urls = os.listdir(dir)
     for x in urls:
         try:
+            await asyncio.sleep(3)
             name = dir + "/" + x[:-5] + '.mp3'
             print(name)
             songUrl = dir + "/" + x
@@ -141,13 +142,6 @@ def getAudio():
     #toMp3(artist,album,dir)
     #toAlbum(album,dir)
 
-    t1 = threading.Thread(target=changeAudio, args=(url,dir,artist,album))
-    t2 = threading.Thread(target=toMp3, args=(artist,album,dir))
-    t3 = threading.Thread(target=toAlbum, args=(album,dir))
-
-    t1.join()
-    t2.join()
-    t3.join()
     #print(os.listdir(os.getcwd()))
     zipFile = album + ".zip"
      
