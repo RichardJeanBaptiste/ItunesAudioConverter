@@ -3,6 +3,7 @@ import ffmpeg
 import os
 import uuid 
 import shutil
+import asyncio
 from flask import Flask, render_template, request, send_file
 from flask_socketio import SocketIO,emit, send
 from mp3_tagger import MP3File
@@ -36,7 +37,7 @@ sched.start()
 
 # Download Audio
 
-def changeAudio(x,dir):
+async def changeAudio(x,dir):
     changeAudio_message()
     playlist = pafy.get_playlist(x)
     for x in range(len(playlist) - 1):
@@ -56,7 +57,7 @@ def changeAudio_message():
 
 # Convert To Mp3
 
-def toMp3(artist,album,dir):
+async def toMp3(artist,album,dir):
     #toMp3_message()
     urls = os.listdir(dir)
     for x in urls:
@@ -85,7 +86,7 @@ def toMp3_message():
 
 # Create Album from audio files
 
-def toAlbum(album,dir):
+async def toAlbum(album,dir):
     try:
         print("ZIP FILES " + album + " " + dir)
         #albumDir = "zip/" + album

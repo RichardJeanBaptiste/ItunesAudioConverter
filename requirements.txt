@@ -70,3 +70,4 @@ wrapt==1.11.2
 youtube-dl==2020.6.16.1
 Flask-PyMongo==2.3.0
 PyMongo==3.11.0
+asyncio==3.4.3
