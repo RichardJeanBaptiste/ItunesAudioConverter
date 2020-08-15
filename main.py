@@ -31,6 +31,7 @@ sched = BackgroundScheduler(daemon=True)
 sched.add_job(clearDirs,'interval',minutes=2)
 sched.start()
 '''
+loop = asyncio.get_event_loop()
 
 # Download Audio
 
@@ -140,7 +141,7 @@ def hello():
 
 
 @app.route("/audio", methods=['GET','POST'])
-async def getAudio():
+def getAudio():
     #get form data
     url = request.form['val']
     artist = request.form['albumArtist']
@@ -152,14 +153,12 @@ async def getAudio():
     os.mkdir(dir)
 
     changeAudio(url,dir,artist,album)
-    await asyncio.sleep(30)
-    toMp3(artist,album,dir)
+    loop.run_until_complete(toMp3(artist,album,dir))
     toAlbum(album,dir)
 
     #print(os.listdir(os.getcwd()))
     zipFile = album + ".zip"
      
-    await asyncio.sleep(90) 
     return send_file(zipFile) 
 
 
