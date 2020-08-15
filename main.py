@@ -37,7 +37,7 @@ sched.start()
 
 # Download Audio
 
-async def changeAudio(x,dir):
+def changeAudio(x,dir):
     changeAudio_message()
     playlist = pafy.get_playlist(x)
     for x in range(len(playlist) - 1):
@@ -86,7 +86,7 @@ def toMp3_message():
 
 # Create Album from audio files
 
-async def toAlbum(album,dir):
+def toAlbum(album,dir):
     try:
         print("ZIP FILES " + album + " " + dir)
         #albumDir = "zip/" + album
@@ -121,7 +121,7 @@ def hello():
 
 
 @app.route("/audio", methods=['GET','POST'])
-def getAudio():
+async def getAudio():
     #get form data
     url = request.form['val']
     artist = request.form['albumArtist']
@@ -134,12 +134,11 @@ def getAudio():
 
     changeAudio(url,dir)
     toMp3(artist,album,dir)
-    #toAlbum(album,dir)
+    toAlbum(album,dir)
 
-    #zipFile = "zip/" + album + ".zip"
+    zipFile = "zip/" + album + ".zip"
 
-    #return send_file(zipFile)
-    return 'Completed'
+    return send_file(zipFile)
     
     
 
