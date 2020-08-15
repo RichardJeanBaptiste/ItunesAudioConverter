@@ -60,9 +60,9 @@ urls = ""
 
 async def toMp3(artist,album,dir):
     #toMp3_message()
-    urls = os.listdir(dir)
-    for x in urls:
-        try:
+    try:
+        urls = os.listdir(dir)
+        for x in urls:
             await asyncio.sleep(3)
             name = dir + "/" + x[:-5] + '.mp3'
             print(name)
@@ -75,8 +75,8 @@ async def toMp3(artist,album,dir):
             mp3.album = album
             mp3.save()
             os.remove(songUrl)
-        except Exception as e:
-            print(e)
+    except Exception as e:
+        print(e)
 
 
 def toMp3_message():
@@ -138,9 +138,9 @@ def getAudio():
     dir = "Dir-" + str(my_id)
     os.mkdir(dir)
 
-    #changeAudio(url,dir,artist,album)
-    #toMp3(artist,album,dir)
-    #toAlbum(album,dir)
+    changeAudio(url,dir,artist,album)
+    toMp3(artist,album,dir)
+    toAlbum(album,dir)
 
     #print(os.listdir(os.getcwd()))
     zipFile = album + ".zip"
