@@ -57,7 +57,7 @@ def changeAudio_message():
 
 # Convert To Mp3
 
-async def toMp3(artist,album,dir):
+def toMp3(artist,album,dir):
     #toMp3_message()
     urls = os.listdir(dir)
     for x in urls:
@@ -88,7 +88,7 @@ def toMp3_message():
 
 def toAlbum(album,dir):
     try:
-        print("ZIP FILES " + album + " " + dir)
+        #print("ZIP FILES " + album + " " + dir)
         albumDir = "zip/" + album
         albumDir = album
         shutil.make_archive(albumDir, 'zip', dir)
@@ -137,7 +137,6 @@ def getAudio():
     toAlbum(album,dir)
 
     print(os.listdir(os.getcwd()))
-    #os.chdir('app')
     zipFile = album + ".zip"
      
     return send_file(zipFile)
