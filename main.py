@@ -59,7 +59,7 @@ def changeAudio_message():
 # Convert To Mp3
 urls = ""
 
-async def toMp3(artist,album,dir):
+def toMp3(artist,album,dir):
     #toMp3_message()
     urls = os.listdir(dir)
     for x in urls:
@@ -107,6 +107,7 @@ def toMp3_message():
 
 # Create Album from audio files
 
+'''
 def toAlbum(album,dir):
     try:
         albumDir = "zip/" + album
@@ -128,9 +129,10 @@ def startOver():
         socketio.emit('startOver', 'start again')
     except Exception:
         print(Exception)
-    
+'''
 
 dir = ""
+album = ""
     
 @app.route("/")
 def hello():
@@ -154,12 +156,22 @@ def getAudio():
 
     changeAudio(url,dir,artist,album)
     #toMp3(artist,album,dir)
-    toAlbum(album,dir)
+    #toAlbum(album,dir)
 
     #print(os.listdir(os.getcwd()))
-    zipFile = album + ".zip"
+    #zipFile = album + ".zip"
      
-    return send_file(zipFile)
+    return render_template("test.html")
+
+@app.route("/test", methods=['GET','POST'])
+def toAlbum():
+    try:
+        albumDir = album + ".zip"
+        albumDir = album
+        shutil.make_archive(albumDir, 'zip', dir)
+        toAlbum_message()
+    except Exception as e:
+        print(e)
     
     
 
