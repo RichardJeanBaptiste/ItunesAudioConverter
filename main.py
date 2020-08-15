@@ -43,7 +43,6 @@ def changeAudio(x,dir):
     for x in range(len(playlist) - 1):
         try:
             playlist['items'][x]['pafy'].getbestaudio(preftype="m4a").download(filepath=dir)
-            print(dir + "/" + playlist['items'][x])
         except OSError:
             return 'no video formats found...try again'
         except IndexError:
