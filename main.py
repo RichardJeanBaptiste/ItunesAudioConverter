@@ -137,6 +137,7 @@ def getAudio():
     toAlbum(album,dir)
 
     print(dir)
+    os.chdir('app')
     zipFile = dir + ".zip"
 
     return send_file(zipFile)
