@@ -59,7 +59,7 @@ def changeAudio_message():
 # Convert To Mp3
 urls = ""
 
-def toMp3(artist,album,dir):
+async def toMp3(artist,album,dir):
     #toMp3_message()
     urls = os.listdir(dir)
     for x in urls:
