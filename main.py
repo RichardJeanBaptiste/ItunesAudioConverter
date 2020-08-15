@@ -37,7 +37,7 @@ sched.start()
 
 # Download Audio
 
-def changeAudio(x,dir):
+def changeAudio(x,dir,artist,album):
     changeAudio_message()
     playlist = pafy.get_playlist(x)
     for x in range(len(playlist) - 1):
@@ -47,6 +47,7 @@ def changeAudio(x,dir):
             return 'no video formats found...try again'
         except IndexError:
             pass
+    toMp3(artist,album,dir)
 
 
 def changeAudio_message():
@@ -57,11 +58,9 @@ def changeAudio_message():
 
 # Convert To Mp3
 
-async def toMp3(artist,album,dir):
+def toMp3(artist,album,dir):
     #toMp3_message()
     #urls = os.listdir(dir)
-    await changeTags(artist,album,dir)
-    '''
     for x in urls:
         try:
             name = dir + "/" + x[:-5] + '.mp3'
@@ -77,7 +76,7 @@ async def toMp3(artist,album,dir):
             os.remove(songUrl)
         except Exception as e:
             print(e)
-        '''
+        
 
 def changeTags(artist,album,dir):
     for x in urls:
@@ -109,7 +108,6 @@ def toMp3_message():
 
 def toAlbum(album,dir):
     try:
-        #print("ZIP FILES " + album + " " + dir)
         albumDir = "zip/" + album
         albumDir = album
         shutil.make_archive(albumDir, 'zip', dir)
@@ -154,10 +152,10 @@ def getAudio():
     os.mkdir(dir)
 
     changeAudio(url,dir)
-    toMp3(artist,album,dir)
+    #toMp3(artist,album,dir)
     toAlbum(album,dir)
 
-    print(os.listdir(os.getcwd()))
+    #print(os.listdir(os.getcwd()))
     zipFile = album + ".zip"
      
     return send_file(zipFile)
