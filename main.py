@@ -35,7 +35,6 @@ sched.start()
 
 
 # Download Audio
-
 async def changeAudio(x,dir,artist,album):
     changeAudio_message()
     playlist = pafy.get_playlist(x)
@@ -142,7 +141,7 @@ def getAudio():
     os.mkdir(dir)
 
     changeAudio(url,dir,artist,album)
-    toMp3(artist,album,dir)
+    #toMp3(artist,album,dir)
     
 
     #print(os.listdir(os.getcwd()))
