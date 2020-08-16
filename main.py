@@ -140,18 +140,19 @@ def getAudio():
     x = threading.Thread(target=toMp3,args=(artist,album,dir),daemon=True)
     x.start()
     #toMp3(artist,album,dir)
-    y = threading.Thread(target=toAlbum,args=(album,dir),daemon=True)
-    y.start()
+    #y = threading.Thread(target=toAlbum,args=(album,dir),daemon=True)
+    #y.start()
     #print(os.listdir(os.getcwd()))
-    #toAlbum(album,dir)
+    
 
     x.join()
-    y.join()
-
-    zipFile = album + ".zip"
-    if(x.isAlive and y.isAlive):
+    #y.join()
+    
+    if(x.isAlive):
         print("still alive")
     else:
+        toAlbum(album,dir)
+        zipFile = album + ".zip"
         return send_file(zipFile) 
     #return 
      
