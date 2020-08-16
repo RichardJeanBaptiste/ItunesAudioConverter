@@ -35,7 +35,7 @@ sched.start()
 
 
 # Download Audio
-async def changeAudio(x,dir,artist,album):
+def changeAudio(x,dir,artist,album):
     changeAudio_message()
     playlist = pafy.get_playlist(x)
     for x in range(len(playlist) - 1):
@@ -45,7 +45,7 @@ async def changeAudio(x,dir,artist,album):
             return 'no video formats found...try again'
         except IndexError:
             pass
-    await toMp3(artist,album,dir)
+    #toMp3(artist,album,dir)
 
 
 
@@ -58,7 +58,7 @@ def changeAudio_message():
 # Convert To Mp3
 urls = ""
 
-async def toMp3(artist,album,dir):
+def toMp3(artist,album,dir):
     #toMp3_message()
     try:
         urls = os.listdir(dir)
@@ -74,7 +74,6 @@ async def toMp3(artist,album,dir):
             mp3.album = album
             mp3.save()
             os.remove(songUrl)
-        await toAlbum(album,dir)
     except Exception as e:
         print(e)
 
@@ -89,15 +88,12 @@ def toMp3_message():
 
 # Create Album from audio files
 
-
 def toAlbum(album,dir):
     try:
         albumDir = "zip/" + album
         albumDir = album
         shutil.make_archive(albumDir, 'zip', dir)
         toAlbum_message()
-        zipFile = album + ".zip"
-        return send_file(zipFile) 
     except Exception as e:
         print(e)
 
@@ -141,18 +137,22 @@ def getAudio():
     os.mkdir(dir)
 
     changeAudio(url,dir,artist,album)
+    x = threading.Thread(target=toMp3,args=(artist,album,dir),daemon=true)
+    x.start()
     #toMp3(artist,album,dir)
-    
-
+    y = threading.Thread(target=toAlbum,args=(album,dir),daemon=true)
+    y.start()
     #print(os.listdir(os.getcwd()))
-
-
     #toAlbum(album,dir)
 
-    #zipFile = album + ".zip"
+    x.join()
+    y.join()
+    
+    zipFile = album + ".zip"
+    return send_file(zipFile) 
      
-    return toAlbum(album,dir)
+    
 
 
 if __name__ == "__main__":
-    asyncio.run(app())
+    app.run()
