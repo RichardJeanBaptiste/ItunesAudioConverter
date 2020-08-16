@@ -149,7 +149,11 @@ def getAudio():
     y.join()
 
     zipFile = album + ".zip"
-    return send_file(zipFile) 
+    if(x.isAlive and y.isAlive):
+        print("still alive")
+    else:
+        return send_file(zipFile) 
+    #return 
      
     
 
