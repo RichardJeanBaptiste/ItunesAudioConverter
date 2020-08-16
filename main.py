@@ -137,17 +137,17 @@ def getAudio():
     os.mkdir(dir)
 
     changeAudio(url,dir,artist,album)
-    x = threading.Thread(target=toMp3,args=(artist,album,dir),daemon=true)
+    x = threading.Thread(target=toMp3,args=(artist,album,dir),daemon=True)
     x.start()
     #toMp3(artist,album,dir)
-    y = threading.Thread(target=toAlbum,args=(album,dir),daemon=true)
+    y = threading.Thread(target=toAlbum,args=(album,dir),daemon=True)
     y.start()
     #print(os.listdir(os.getcwd()))
     #toAlbum(album,dir)
 
     x.join()
     y.join()
-    
+
     zipFile = album + ".zip"
     return send_file(zipFile) 
      
