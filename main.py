@@ -13,6 +13,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 
 def nextReq():
     print("nextReq")
+    pass
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = b'\x1a\x95\xe3A\xd9\x03Z-\xe8\xbb\xb4\x7f\x1f\xb63p'
