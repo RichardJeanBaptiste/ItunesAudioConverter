@@ -26,6 +26,24 @@ album = ""
 def connectMsg():
     print("user connected")
 
+
+# Download Audio
+async def changeAudio(x,dir,artist,album):
+    playlist = ""
+    try:
+        playlist = pafy.get_playlist(x)
+        for x in range(len(playlist) - 1 ):
+            playlist['items'][x]['pafy'].getbestaudio(preftype="m4a").download(filepath=dir)
+            socketio.emit('Working')
+            print(x)
+    except OSError as e:
+        print(e)
+        return 'no video formats found...try again'
+    except IndexError as e:
+        print(e)
+    except Exception as e:
+        print(e)
+        return e
   
 @app.route("/")
 def hello():
