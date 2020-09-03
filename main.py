@@ -61,30 +61,35 @@ def getAudio():
     dir = "Dir-" + str(my_id)
     os.mkdir(dir)
 
-    
-    asyncio.run(changeAudio(url,dir,artist,album))
+    loop = asyncio.get_event_loop()
+    result = loop.run_until_complete(changeAudio(url,dir,artist,album))
+    print(result)
+    #asyncio.run(changeAudio(url,dir,artist,album))
     
     return redirect(url_for('mp3' , artist=artist, album=album, dir=dir))
 
 
 @app.route("/mp3/<artist>/<album>/<dir>")
 def mp3(artist,album,dir):
-    asyncio.run(toMp3(artist,album,dir))
+    loop = asyncio.get_event_loop()
+    result = loop.run_until_complete(toMp3(artist,album,dir))
+    #asyncio.run(toMp3(artist,album,dir))
     return redirect(url_for('zipAlbum', album=album, dir=dir))
 
 
 @app.route("/zip/<album>/<dir>")
 def zipAlbum(album,dir):
-    asyncio.run(toAlbum(album,dir))
+    loop = asyncio.get_event_loop()
+    result = loop.run_until_complete(toAlbum(album,dir))
+    #asyncio.run(toAlbum(album,dir))
     return redirect(url_for('sendZip', album=album))
 
 @app.route("/sendfile/<album>")
 def sendZip(album):
     zipFile = album + ".zip"
     return send_file(zipFile)
-    #asdaSS
-    
 
+    
 if __name__ == "__main__":
     app.run()
 
