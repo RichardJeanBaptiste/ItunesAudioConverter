@@ -4,6 +4,7 @@ import os
 import asyncio
 import shutil
 from mp3_tagger import MP3File
+from flask_socketio import SocketIO,emit, send
 
 
 # Download Audio
@@ -23,8 +24,6 @@ async def changeAudio(x,dir,artist,album):
         print(e)
         return e
     
-
-#asyncio.run(changeAudio("https://www.youtube.com/watch?v=xdGLK_sOWb0","a","a","a"))
 
 # convert files to mp3 format
 async def toMp3(artist,album,dir):
