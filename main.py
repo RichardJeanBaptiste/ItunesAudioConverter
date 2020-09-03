@@ -11,14 +11,16 @@ from mp3_tagger import MP3File
 from apscheduler.schedulers.background import BackgroundScheduler
 
 
+def nextReq():
+    print("nextReq")
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = b'\x1a\x95\xe3A\xd9\x03Z-\xe8\xbb\xb4\x7f\x1f\xb63p'
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 app.after_request(nextReq)
 
 
-def nextReq():
-    print("nextReq")
+
 
 '''
 def clearDirs():
