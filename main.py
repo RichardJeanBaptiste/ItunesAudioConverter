@@ -20,33 +20,11 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 app.after_request(nextReq())
 
 
-
-
-'''
-def clearDirs():
-    os.chdir("tmp")
-    tmpList = os.listdir("tmp")
-    for x in tmpList:
-        try:
-            shutil.rmtree("app/tmp/" + x)
-        except Exception:
-            print(x + " was not deleted")
-    print(os.listdir("tmp"))
-    
-
-sched = BackgroundScheduler(daemon=True)
-sched.add_job(clearDirs,'interval',minutes=2)
-sched.start()
-'''
-
-print("new branch.")
-
 urls = ""
 dir = ""
 album = ""
 
-
-    
+  
 @app.route("/")
 def hello():
     try:
@@ -69,7 +47,6 @@ def getAudio():
 
     loop = asyncio.get_event_loop()
     result = loop.run_until_complete(changeAudio(url,dir,artist,album))
-    print(result)
     #asyncio.run(changeAudio(url,dir,artist,album))
     
     return redirect(url_for('mp3' , artist=artist, album=album, dir=dir))
@@ -101,3 +78,20 @@ def sendZip(album):
 if __name__ == "__main__":
     app.run()
 
+
+'''
+def clearDirs():
+    os.chdir("tmp")
+    tmpList = os.listdir("tmp")
+    for x in tmpList:
+        try:
+            shutil.rmtree("app/tmp/" + x)
+        except Exception:
+            print(x + " was not deleted")
+    print(os.listdir("tmp"))
+    
+
+sched = BackgroundScheduler(daemon=True)
+sched.add_job(clearDirs,'interval',minutes=2)
+sched.start()
+'''
