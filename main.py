@@ -33,6 +33,8 @@ sched.add_job(clearDirs,'interval',minutes=2)
 sched.start()
 '''
 
+print("new branch")
+
 urls = ""
 dir = ""
 album = ""
