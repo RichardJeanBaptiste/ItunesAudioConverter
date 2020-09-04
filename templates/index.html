@@ -86,7 +86,8 @@
         
         
         socket.on('GettingPlaylist', function(msg) {  
-            alert(msg)  
+            socket.send("GP-------------->");
+            console.log("aasdasdsa")
             //mainForm.style.visibility = "hidden";
             //loaderForm.style.visibility = "visible";
             //loaderText.innerText = "Getting playlist";
