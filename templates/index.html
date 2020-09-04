@@ -84,15 +84,16 @@
             console.log(msg)
         })
         
-
-        socket.on('GettingPlaylist', function(msg) {    
-            mainForm.style.visibility = "hidden";
-            loaderForm.style.visibility = "visible";
-            loaderText.innerText = "Getting playlist";
-            instruct.style.visibility = "hidden";
+        
+        socket.on('GettingPlaylist', function(msg) {  
+            alert(msg)  
+            //mainForm.style.visibility = "hidden";
+            //loaderForm.style.visibility = "visible";
+            //loaderText.innerText = "Getting playlist";
+            //instruct.style.visibility = "hidden";
         });
 
-        
+        /* 
         socket.on('Converting',function(){
             loaderText.innerText = "Converting playlist";
         });
@@ -110,7 +111,7 @@
             instruct.style.visibility = "visible";
             clearForms();
         })
-    
+        */
     </script>
     
 </body>
