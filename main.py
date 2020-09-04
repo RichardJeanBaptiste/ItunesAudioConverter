@@ -4,7 +4,6 @@ import os
 import uuid 
 import shutil
 import asyncio
-from convert import *
 from flask import Flask, render_template, request, send_file, redirect, url_for
 from flask_socketio import SocketIO,emit, send
 from mp3_tagger import MP3File
