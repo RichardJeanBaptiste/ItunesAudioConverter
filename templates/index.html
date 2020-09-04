@@ -79,26 +79,30 @@
         socket.on('connect', function(){
             socket.send("User has connected")
         })
-
+        
         socket.on('Working', function(msg){
             console.log(msg)
         })
-        /*
-        socket.on('changeAudio', function(msg) {    
+        
+
+        socket.on('GettingPlaylist', function(msg) {    
             mainForm.style.visibility = "hidden";
             loaderForm.style.visibility = "visible";
             loaderText.innerText = "Getting playlist";
             instruct.style.visibility = "hidden";
         });
+
         
-        socket.on('toMp3',function(){
+        socket.on('Converting',function(){
             loaderText.innerText = "Converting playlist";
         });
 
-        socket.on('toAlbum', function(){
+        
+        socket.on('ZipFile', function(){
             loaderText.innerText = "Sending To You Now";
         });
 
+        
         socket.on('startOver', function(){
             loaderForm.style.visibility = "hidden";
             mainForm.style.visibility = "visible";
@@ -106,8 +110,7 @@
             instruct.style.visibility = "visible";
             clearForms();
         })
-    */
-
+    
     </script>
     
 </body>

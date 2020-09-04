@@ -31,6 +31,7 @@ def connectMsg():
 async def changeAudio(x,dir,artist,album):
     playlist = ""
     try:
+        socketio.emit('GettingPlaylist')
         playlist = pafy.get_playlist(x)
         for x in range(len(playlist) - 1 ):
             playlist['items'][x]['pafy'].getbestaudio(preftype="m4a").download(filepath=dir)
@@ -44,6 +45,40 @@ async def changeAudio(x,dir,artist,album):
     except Exception as e:
         print(e)
         return e
+
+
+# convert files to mp3 format
+async def toMp3(artist,album,dir):
+    socketio.emit('Converting')
+    #toMp3_message()
+    try:
+        urls = os.listdir(dir)
+        for x in urls:
+            socketio.emit('Working')
+            name = dir + "/" + x[:-5] + '.mp3'
+            print(name)
+            songUrl = dir + "/" + x
+            stream = ffmpeg.input(songUrl)
+            stream = ffmpeg.output(stream, name)
+            ffmpeg.run(stream)
+            mp3 = MP3File(name)
+            mp3.artist = artist
+            mp3.album = album
+            mp3.save()
+            os.remove(songUrl)
+    except Exception as e:
+        print(e)
+
+# Create zip directory 
+async def toAlbum(album,dir):
+    try:
+        socketio.emit('ZipFile')
+        albumDir = "zip/" + album
+        albumDir = album
+        shutil.make_archive(albumDir, 'zip', dir)
+    except Exception as e:
+        print(e)
+
   
 @app.route("/")
 def hello():
@@ -67,7 +102,6 @@ def getAudio():
 
     loop = asyncio.get_event_loop()
     result = loop.run_until_complete(changeAudio(url,dir,artist,album))
-    #asyncio.run(changeAudio(url,dir,artist,album))
     
     return redirect(url_for('mp3' , artist=artist, album=album, dir=dir))
 
@@ -76,7 +110,6 @@ def getAudio():
 def mp3(artist,album,dir):
     loop = asyncio.get_event_loop()
     result = loop.run_until_complete(toMp3(artist,album,dir))
-    #asyncio.run(toMp3(artist,album,dir))
     return redirect(url_for('zipAlbum', album=album, dir=dir))
 
 
@@ -84,12 +117,12 @@ def mp3(artist,album,dir):
 def zipAlbum(album,dir):
     loop = asyncio.get_event_loop()
     result = loop.run_until_complete(toAlbum(album,dir))
-    #asyncio.run(toAlbum(album,dir))
     return redirect(url_for('sendZip', album=album))
 
 @app.route("/sendfile/<album>")
 def sendZip(album):
     zipFile = album + ".zip"
+    socketio.emit('startOver')
     return send_file(zipFile)
 
 
