@@ -61,13 +61,13 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.slim.js" integrity="sha512-hcPg/5yQzb6Ocz2NHy+XdRfmET1kTOtZc1l6Yt2TyriHW6WpK80hoLfaKG5wI7SqLt/x6IiV9kRoInYCA/BEWw==" crossorigin="anonymous"></script>
     <script type="text/javascript" charset="utf-8">
-        try {
-            let socket = io.connect("https://itunes-audio.herokuapp.com/");
+      
+        let socket = io.connect("https://itunes-audio.herokuapp.com/");
                  
-            let mainForm = document.getElementById("mainForm");
-            let loaderForm = document.getElementById("loaderForm");
-            let loaderText = document.getElementById("loader-text");
-            let instruct = document.getElementById("instruct");
+        let mainForm = document.getElementById("mainForm");
+        let loaderForm = document.getElementById("loaderForm");
+        let loaderText = document.getElementById("loader-text");
+        let instruct = document.getElementById("instruct");
 
             function clearForms(){
                 document.getElementById('url').value = "";
@@ -90,10 +90,10 @@
             socket.on('GettingPlaylist', function(msg) {  
                 socket.send("GP-------------->");
                 console.log("aasdasdsa")
-                //mainForm.style.visibility = "hidden";
-                //loaderForm.style.visibility = "visible";
-                //loaderText.innerText = "Getting playlist";
-                //instruct.style.visibility = "hidden";
+                mainForm.style.visibility = "hidden";
+                loaderForm.style.visibility = "visible";
+                loaderText.innerText = "Getting playlist";
+                instruct.style.visibility = "hidden";
             });
 
         
@@ -115,9 +115,6 @@
             clearForms();
         })
         
-        } catch (error) {
-            console.log(error)
-        }
         
    
     </script>
