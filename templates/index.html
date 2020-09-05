@@ -63,42 +63,38 @@
     <script type="text/javascript" charset="utf-8">
         try {
             let socket = io.connect("https://itunes-audio.herokuapp.com/");
-        } catch (error) {
-            console.log(error)
-        }
-        
-        /*
-        let mainForm = document.getElementById("mainForm");
-        let loaderForm = document.getElementById("loaderForm");
-        let loaderText = document.getElementById("loader-text");
-        let instruct = document.getElementById("instruct");
+                 
+            let mainForm = document.getElementById("mainForm");
+            let loaderForm = document.getElementById("loaderForm");
+            let loaderText = document.getElementById("loader-text");
+            let instruct = document.getElementById("instruct");
 
-        function clearForms(){
-            document.getElementById('url').value = "";
-            document.getElementById('albumArtist').value = "";
-            document.getElementById('albumName').value = "";
-        }
+            function clearForms(){
+                document.getElementById('url').value = "";
+                document.getElementById('albumArtist').value = "";
+                document.getElementById('albumName').value = "";
+            }
 
 
-        clearForms();
+            clearForms();
 
-        socket.on('connect', function(){
-            socket.send("User has connected")
-        })
+            socket.on('connect', function(){
+                socket.send("User has connected")
+            })
         
-        socket.on('Working', function(msg){
-            console.log(msg)
-        })
+            socket.on('Working', function(msg){
+                console.log(msg)
+            })
         
         
-        socket.on('GettingPlaylist', function(msg) {  
-            socket.send("GP-------------->");
-            console.log("aasdasdsa")
-            //mainForm.style.visibility = "hidden";
-            //loaderForm.style.visibility = "visible";
-            //loaderText.innerText = "Getting playlist";
-            //instruct.style.visibility = "hidden";
-        });
+            socket.on('GettingPlaylist', function(msg) {  
+                socket.send("GP-------------->");
+                console.log("aasdasdsa")
+                //mainForm.style.visibility = "hidden";
+                //loaderForm.style.visibility = "visible";
+                //loaderText.innerText = "Getting playlist";
+                //instruct.style.visibility = "hidden";
+            });
 
         /* 
         socket.on('Converting',function(){
@@ -118,7 +114,12 @@
             instruct.style.visibility = "visible";
             clearForms();
         })
-        */
+        
+        } catch (error) {
+            console.log(error)
+        }
+        
+   
     </script>
     
 </body>
