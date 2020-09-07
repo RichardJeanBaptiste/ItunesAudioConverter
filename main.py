@@ -27,7 +27,7 @@ def connectMsg():
 
 
 # Download Audio
-async def changeAudio(x,dir,artist,album):
+def changeAudio(x,dir,artist,album):
     playlist = ""
     try:
         socketio.emit('GettingPlaylist')
@@ -47,7 +47,7 @@ async def changeAudio(x,dir,artist,album):
 
 
 # convert files to mp3 format
-async def toMp3(artist,album,dir):
+def toMp3(artist,album,dir):
     socketio.emit('Converting')
     #toMp3_message()
     try:
@@ -69,7 +69,7 @@ async def toMp3(artist,album,dir):
         print(e)
 
 # Create zip directory 
-async def toAlbum(album,dir):
+def toAlbum(album,dir):
     try:
         socketio.emit('ZipFile')
         albumDir = "zip/" + album
@@ -99,23 +99,26 @@ def getAudio():
     dir = "Dir-" + str(my_id)
     os.mkdir(dir)
 
-    loop = asyncio.get_event_loop()
-    result = loop.run_until_complete(changeAudio(url,dir,artist,album))
+    #loop = asyncio.get_event_loop()
+    #result = loop.run_until_complete(changeAudio(url,dir,artist,album))
+    changeAudio(url,dir,artist,album)
     
     return redirect(url_for('mp3' , artist=artist, album=album, dir=dir))
 
 
 @app.route("/mp3/<artist>/<album>/<dir>")
 def mp3(artist,album,dir):
-    loop = asyncio.get_event_loop()
-    result = loop.run_until_complete(toMp3(artist,album,dir))
+    #loop = asyncio.get_event_loop()
+    #result = loop.run_until_complete(toMp3(artist,album,dir))
+    toMp3(artist,album,dir)
     return redirect(url_for('zipAlbum', album=album, dir=dir))
 
 
 @app.route("/zip/<album>/<dir>")
 def zipAlbum(album,dir):
-    loop = asyncio.get_event_loop()
-    result = loop.run_until_complete(toAlbum(album,dir))
+    #loop = asyncio.get_event_loop()
+    #result = loop.run_until_complete(toAlbum(album,dir))
+    toAlbum(album,dir)
     return redirect(url_for('sendZip', album=album))
 
 @app.route("/sendfile/<album>")
