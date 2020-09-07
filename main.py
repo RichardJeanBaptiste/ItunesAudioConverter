@@ -10,6 +10,7 @@ from mp3_tagger import MP3File
 from apscheduler.schedulers.background import BackgroundScheduler
 
 
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = b'\x1a\x95\xe3A\xd9\x03Z-\xe8\xbb\xb4\x7f\x1f\xb63p'
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
@@ -21,9 +22,11 @@ urls = ""
 dir = ""
 album = ""
 
+
 @socketio.on("connect")
 def connectMsg():
     print("user connected")
+
 
 
 # Download Audio
@@ -34,7 +37,7 @@ async def changeAudio(x,dir,artist,album):
         playlist = pafy.get_playlist(x)
         for x in range(len(playlist) - 1 ):
             playlist['items'][x]['pafy'].getbestaudio(preftype="m4a").download(filepath=dir)
-            socketio.emit('Working')
+            #socketio.emit('Working')
             print(x)
     except OSError as e:
         print(e)
@@ -48,12 +51,12 @@ async def changeAudio(x,dir,artist,album):
 
 # convert files to mp3 format
 async def toMp3(artist,album,dir):
-    socketio.emit('Converting')
+    #socketio.emit('Converting')
     #toMp3_message()
     try:
         urls = os.listdir(dir)
         for x in urls:
-            socketio.emit('Working')
+            #socketio.emit('Working')
             name = dir + "/" + x[:-5] + '.mp3'
             print(name)
             songUrl = dir + "/" + x
@@ -71,7 +74,7 @@ async def toMp3(artist,album,dir):
 # Create zip directory 
 async def toAlbum(album,dir):
     try:
-        socketio.emit('ZipFile')
+        #socketio.emit('ZipFile')
         albumDir = "zip/" + album
         albumDir = album
         shutil.make_archive(albumDir, 'zip', dir)
@@ -99,6 +102,7 @@ def getAudio():
     dir = "Dir-" + str(my_id)
     os.mkdir(dir)
 
+    
     loop = asyncio.get_event_loop()
     result = loop.run_until_complete(changeAudio(url,dir,artist,album))
     
@@ -121,14 +125,13 @@ def zipAlbum(album,dir):
 @app.route("/sendfile/<album>")
 def sendZip(album):
     zipFile = album + ".zip"
-    socketio.emit('startOver')
+    #socketio.emit('startOver')
     return send_file(zipFile)
-
 
 
     
 if __name__ == "__main__":
-    socketio.run(app)
+    app.run()
 
 
 '''
