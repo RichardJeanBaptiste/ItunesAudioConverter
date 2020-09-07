@@ -51,12 +51,12 @@ async def changeAudio(x,dir,artist,album):
 
 # convert files to mp3 format
 async def toMp3(artist,album,dir):
-    #socketio.emit('Converting')
+    socketio.emit('Converting')
     #toMp3_message()
     try:
         urls = os.listdir(dir)
         for x in urls:
-            #socketio.emit('Working')
+            socketio.emit('Working')
             name = dir + "/" + x[:-5] + '.mp3'
             print(name)
             songUrl = dir + "/" + x
@@ -74,7 +74,7 @@ async def toMp3(artist,album,dir):
 # Create zip directory 
 async def toAlbum(album,dir):
     try:
-        #socketio.emit('ZipFile')
+        socketio.emit('ZipFile')
         albumDir = "zip/" + album
         albumDir = album
         shutil.make_archive(albumDir, 'zip', dir)
