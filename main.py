@@ -27,12 +27,13 @@ album = ""
 def connectMsg():
     print("user connected")
 
-socketio.send("BackEnd")
+
 
 # Download Audio
 async def changeAudio(x,dir,artist,album):
     playlist = ""
     try:
+        socketio.send("BackEnd")
         socketio.emit('GettingPlaylist')
         playlist = pafy.get_playlist(x)
         for x in range(len(playlist) - 1 ):
