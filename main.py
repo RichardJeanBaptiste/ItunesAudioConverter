@@ -21,7 +21,7 @@ urls = ""
 dir = ""
 album = ""
 
-@socketio.on("connect")
+@socketio.on("conn")
 def connectMsg():
     print("user connected")
 
