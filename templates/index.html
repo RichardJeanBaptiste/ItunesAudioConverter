@@ -63,12 +63,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.slim.js" integrity="sha512-hcPg/5yQzb6Ocz2NHy+XdRfmET1kTOtZc1l6Yt2TyriHW6WpK80hoLfaKG5wI7SqLt/x6IiV9kRoInYCA/BEWw==" crossorigin="anonymous"></script>
     <script type="text/javascript" charset="utf-8">
 
-        try {
-            let socket = io.connect("https://itunes-audio.herokuapp.com/");
-        } catch (error) {
-            console.log(error)
-        }
-      
+        let socket = io.connect("https://itunes-audio.herokuapp.com/");
         
         /*
         let mainForm = document.getElementById("mainForm");
