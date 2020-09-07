@@ -64,7 +64,10 @@
     <script type="text/javascript" charset="utf-8">
 
         let socket = io.connect("https://itunes-audio.herokuapp.com/");
-        
+
+        socket.on("BackEnd", function(){
+            console.log("connected to back")
+        }) 
         /*
         let mainForm = document.getElementById("mainForm");
         let loaderForm = document.getElementById("loaderForm");

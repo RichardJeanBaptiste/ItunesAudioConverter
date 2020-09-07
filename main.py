@@ -27,7 +27,7 @@ album = ""
 def connectMsg():
     print("user connected")
 
-
+socketio.send("BackEnd")
 
 # Download Audio
 async def changeAudio(x,dir,artist,album):
