@@ -67,7 +67,7 @@ wcwidth==0.1.9
 websocket-client==0.57.0
 Werkzeug==1.0.1
 wrapt==1.11.2
-youtube-dl==2020.6.16.1
+youtube-dl==2020.9.6
 Flask-PyMongo==2.3.0
 PyMongo==3.11.0
 asyncio==3.4.3
