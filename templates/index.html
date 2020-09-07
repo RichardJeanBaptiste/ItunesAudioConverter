@@ -51,7 +51,7 @@
             3) Download and add to Itunes.
         </p>
     </div>
-
+    {{ artist }}
     <div id="loaderForm" class="row">
         <p class=".col-sm-4" id="loader-text"></p>
         <div class="spinner-border .col-sm-4 text-primary" role="status">
@@ -62,7 +62,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.slim.js" integrity="sha512-hcPg/5yQzb6Ocz2NHy+XdRfmET1kTOtZc1l6Yt2TyriHW6WpK80hoLfaKG5wI7SqLt/x6IiV9kRoInYCA/BEWw==" crossorigin="anonymous"></script>
     <script type="text/javascript" charset="utf-8">
       
-        let socket = io.connect("https://itunes-audio.herokuapp.com/");
+        //let socket = io.connect("https://itunes-audio.herokuapp.com/");
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
                  
         let mainForm = document.getElementById("mainForm");
         let loaderForm = document.getElementById("loaderForm");
