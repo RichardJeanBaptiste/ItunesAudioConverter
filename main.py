@@ -91,6 +91,11 @@ def getAudio():
     return "asd"
 
 
+@app.route("/test")
+def test():
+    return "Hello from tests"
+
+
 
 
 
