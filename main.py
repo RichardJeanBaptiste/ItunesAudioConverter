@@ -122,6 +122,7 @@ def zipAlbum(album,dir):
     loop = asyncio.get_event_loop()
     result = loop.run_until_complete(toAlbum(album,dir))
     return redirect(url_for('sendZip', album=album))
+    #asd
 
 @app.route("/sendfile/<album>")
 def sendZip(album):
