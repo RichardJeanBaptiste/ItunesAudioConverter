@@ -68,10 +68,10 @@ async def toMp3(artist,album,dir):
             stream = ffmpeg.input(songUrl)
             stream = ffmpeg.output(stream, name)
             await ffmpeg.run(stream)
-            await createMp3(name,artist)
+            createMp3(name,artist)
             os.remove(songUrl)
     except Exception as e:
-        print(e)
+        return e
 
 # Create zip directory 
 async def toAlbum(album,dir):
@@ -123,7 +123,6 @@ def zipAlbum(album,dir):
     loop = asyncio.get_event_loop()
     result = loop.run_until_complete(toAlbum(album,dir))
     return redirect(url_for('sendZip', album=album))
-    #asd
 
 @app.route("/sendfile/<album>")
 def sendZip(album):
