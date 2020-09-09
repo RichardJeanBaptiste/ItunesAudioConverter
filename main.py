@@ -35,7 +35,6 @@ async def changeAudio(x,dir,artist,album):
     try:
         playlist = pafy.get_playlist(x)
         for x in range(len(playlist) - 1 ):
-            print(playlist['items'][x]['pafy'])
             await playlist['items'][x]['pafy'].getbestaudio(preftype="m4a").download(filepath=dir)
     except OSError as e:
         print(e)
@@ -44,7 +43,6 @@ async def changeAudio(x,dir,artist,album):
         print(e)
     except Exception as e:
         print(e)
-        return e
 
 def createMp3(name, artist):
     mp3 = MP3File(name)
