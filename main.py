@@ -49,7 +49,7 @@ async def changeAudio(x,dir,artist,album):
         print(e)
         return e
 
-def transferMp3(name, artist):
+async def createMp3(name, artist):
     mp3 = MP3File(name)
     mp3.artist = artist
     mp3.album = album
@@ -68,6 +68,7 @@ async def toMp3(artist,album,dir):
             stream = ffmpeg.input(songUrl)
             stream = ffmpeg.output(stream, name)
             await ffmpeg.run(stream)
+            await createMp3(name,artist)
             os.remove(songUrl)
     except Exception as e:
         return e
@@ -114,12 +115,6 @@ def getAudio():
 def mp3(artist,album,dir):
     loop = asyncio.get_event_loop()
     result = loop.run_until_complete(toMp3(artist,album,dir))
-    return redirect(url_for('mp3sec', album=album, dir=dir))
-
-@app.route("/mp3trans/<album>/<dir>")
-def mp3sec(album,dir):
-    for x in dir:
-        print(x)
     return redirect(url_for('zipAlbum', album=album, dir=dir))
 
 
