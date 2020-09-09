@@ -64,11 +64,15 @@
     <script type="text/javascript" charset="utf-8">
 
         
-        let socket =  io( "https://itunes-audio.herokuapp.com/", {'transports': ['websocket']});
+        //let socket =  io( "https://itunes-audio.herokuapp.com/", {'transports': ['websocket']});
+
+        let socket = io('https://itunes-audio.herokuapp.com/', { transports: ['websocket'] });
 
         socket.on("BackEnd", function(){
             console.log("connected to back")
         }) 
+
+        
         /*
         let mainForm = document.getElementById("mainForm");
         let loaderForm = document.getElementById("loaderForm");
