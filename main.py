@@ -29,8 +29,6 @@ def connectMsg():
 
 
 
-
-
 # Download Audio
 async def changeAudio(x,dir,artist,album):
     playlist = ""
@@ -59,13 +57,12 @@ async def toMp3(artist,album,dir):
     try:
         urls = os.listdir(dir)
         for x in urls:
-            socketio.emit('Working')
             name = dir + "/" + x[:-5] + '.mp3'
             print(name)
             songUrl = dir + "/" + x
             stream = ffmpeg.input(songUrl)
             stream = ffmpeg.output(stream, name)
-            ffmpeg.run(stream)
+            await ffmpeg.run(stream)
             mp3 = MP3File(name)
             mp3.artist = artist
             mp3.album = album
