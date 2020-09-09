@@ -67,8 +67,8 @@ async def toMp3(artist,album,dir):
             songUrl = dir + "/" + x
             stream = ffmpeg.input(songUrl)
             stream = ffmpeg.output(stream, name)
-            await ffmpeg.run(stream)
-            createMp3(name,artist)
+            ffmpeg.run(stream)
+            await createMp3(name,artist)
             os.remove(songUrl)
     except Exception as e:
         return e
