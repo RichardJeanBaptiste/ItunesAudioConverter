@@ -87,16 +87,6 @@ def hello():
 
 @app.route("/audio")
 def getAudio():
-    #get form data
-    url = request.form['val']
-    artist = request.form['albumArtist']
-    album = request.form['albumName']
-    
-    #create tmp dir
-    my_id = uuid.uuid1()
-    dir = "Dir-" + str(my_id)
-    os.mkdir(dir)
-
     #changeAudio(url,dir,artist,album)
     return "asd"
 
