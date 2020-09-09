@@ -27,6 +27,11 @@ album = ""
 def connectMsg():
     print("user connected")
 
+@socketio.on("Working")
+def sendWorking():
+    socketio.send("working1")
+    print("Working")
+
 
 
 # Download Audio
