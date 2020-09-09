@@ -64,7 +64,7 @@
     <script type="text/javascript" charset="utf-8">
 
         
-        let socket =  io( "https://itunes-audio.herokuapp.com/", {'transports': ['polling']});
+        let socket =  io("https://itunes-audio.herokuapp.com/audio", {'transports': ['websockets']});
 
     
         socket.on("BackEnd", function(){
