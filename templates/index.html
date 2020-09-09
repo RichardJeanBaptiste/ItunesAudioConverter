@@ -64,7 +64,7 @@
     <script type="text/javascript" charset="utf-8">
 
         console.log("https://itunes-audio.herokuapp.com/audio");
-        let socket =  io("https://itunes-audio.herokuapp.com/audio", {'transports': ['websockets']});
+        let socket =  io();
 
     
         socket.on("BackEnd", function(){
