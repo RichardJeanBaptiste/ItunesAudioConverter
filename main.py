@@ -99,7 +99,7 @@ def getAudio():
     dir = "Dir-" + str(my_id)
     os.mkdir(dir)
 
-    changeAudio(url,dir,artist,album)
+    #changeAudio(url,dir,artist,album)
     return "asd"
 
 
