@@ -49,6 +49,11 @@ async def changeAudio(x,dir,artist,album):
         print(e)
         return e
 
+def createMp3(name, artist):
+    mp3 = MP3File(name)
+    mp3.artist = artist
+    mp3.album = album
+    mp3.save()
 
 # convert files to mp3 format
 async def toMp3(artist,album,dir):
@@ -63,10 +68,7 @@ async def toMp3(artist,album,dir):
             stream = ffmpeg.input(songUrl)
             stream = ffmpeg.output(stream, name)
             await ffmpeg.run(stream)
-            mp3 = MP3File(name)
-            mp3.artist = artist
-            mp3.album = album
-            mp3.save()
+            await createMp3(name,artist)
             os.remove(songUrl)
     except Exception as e:
         print(e)
