@@ -36,6 +36,10 @@
         </form>
     </div>
 
+    <form action="/test" method="GET">
+        <input type="submit">
+    </form>
+
     <br/>
     <div id="instruct" class="row">
         <p class=".col-sm-4">
@@ -65,6 +69,8 @@
 
         console.log("https://itunes-audio.herokuapp.com/audio");
         let socket =  io();
+
+        ///http://0.0.0.0:40703
 
     
         socket.on("BackEnd", function(){
