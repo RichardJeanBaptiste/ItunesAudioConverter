@@ -22,19 +22,10 @@
 <body>
     <h1 style="text-align: center; margin-top: 8%;">Itunes Playlist Converter</h1>
 
-    <div id="mainForm">
-        <br/>
-        <form action='/audio' method="POST">
-            <input type="text" name="val" placeholder="url" id="url" required>
-            <br/>
-            <br/>
-            <input id="albumArtist" type="text" name="albumArtist" placeholder="playlist author" required>
-            <input id="albumName" type="text" name="albumName" placeholder="playlist name" required>
-            <br/>
-            <br/>
-                <input class="btn btn-primary" type="submit" value="Download" id="submitBtn" onclick='change()'>
-        </form>
+    <div style="text-align: center;">
+        {{msg}}
     </div>
+       
 
     <br/>
     <div id="instruct" class="row">
@@ -61,10 +52,7 @@
     </div>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.slim.js" integrity="sha512-hcPg/5yQzb6Ocz2NHy+XdRfmET1kTOtZc1l6Yt2TyriHW6WpK80hoLfaKG5wI7SqLt/x6IiV9kRoInYCA/BEWw==" crossorigin="anonymous"></script>
-    <script type="text/javascript" charset="utf-8">
-    
-    
-    </script>
+    <script type="text/javascript" charset="utf-8"></script>
     
 </body>
 </html>
